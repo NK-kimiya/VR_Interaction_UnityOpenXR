@@ -1,0 +1,27 @@
+# 不要なビルド・キャッシュ・ログ関連
+Library/
+Logs/
+Build/
+UserSettings/
+
+# Burst Debug 情報
+GameScene_BurstDebugInformation_DoNotShip/
+UISecene_BurstDebugInformation_DoNotShip/
+
+#ビルド成果物
+*.apk
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Visual Studio / JetBrains Rider などIDE
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.user
+*.unityproj
