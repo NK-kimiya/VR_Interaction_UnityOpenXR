@@ -129,6 +129,92 @@
 | `centerEyePosition` | HMD（頭部）の位置 |
 | `pointerRotation` | コントローラーの回転 |
 
+
+---
+
+## 🧷 アクションの割り当てとXR Controllerの自動動作について
+
+本プロジェクトでは、Unityの `XR Controller (Action-based)` コンポーネントを使用しています。  
+このコンポーネントは、Input Systemで定義されたアクションを各入力スロットに割り当てることで、**自動的にVRコントローラーの基本操作を処理**してくれます。
+
+---
+
+### 🎛️ 各変数に対応するアクションの紐づけ一覧
+
+| XR Controllerのプロパティ       | 機能概要                                | 紐づけるアクション名（アクションマップ）           |
+|-------------------------------|-----------------------------------------|--------------------------------------------------|
+| **Position Action**            | コントローラーの位置取得                 | `Position`（RightHand）                         |
+| **Rotation Action**            | コントローラーの回転取得                 | `Rotation`（RightHand）                         |
+| **Tracking State Action**      | トラッキングの有効状態を検出             | `TrackingState`（RightHand）※あれば             |
+| **Select Action**              | 掴む・選択する                           | `Select`（RightHandInteractions）               |
+| **Activate Action**            | アクティブ化（発射・実行）               | `Activate`（RightHandInteractions）             |
+| **UI Press Action**            | UIボタンを押す操作                       | `UIPress`（RightHandInteractions）              |
+| **Rotate Anchor Action**       | アンカー（移動ポイント）を回転操作        | `RotateAnchor`（RightHandInteractions）         |
+| **Translate Anchor Action**    | アンカー（移動ポイント）を移動操作        | `TranslateAnchor`（RightHandInteractions）      |
+
+---
+
+### 🔧 割り当て方法（インスペクター操作）
+
+1. `RightHand Controller` を選択
+2. インスペクターで `XR Controller (Action-based)` を展開
+3. 各アクションスロットの横の「🔍」ボタンから、`InputActionForVR` を選択
+4. 対応するアクションを選んで紐づける
+
+---
+
+### ✅ 自動動作の仕組み
+
+Unityの `XR Controller (Action-based)` は、正しくアクションを紐づけることで、
+
+- Ray Interactor や Direct Interactor による掴む／選ぶ操作
+- トリガーやスティックを使った移動・回転
+- UIの操作（ボタン押下）
+
+など、**標準的なVRコントローラー操作をスクリプトなしで実行可能**です。
+
+---
+
+### 💡 補足：スクリプトでの拡張も可能
+
+特殊な処理を追加したい場合には、アクションをスクリプトから利用することもできます。
+
+#### 例（C#）:
+
+```csharp
+[SerializeField] private InputActionReference selectAction;
+
+private void OnEnable() {
+    selectAction.action.performed += ctx => Debug.Log("Selected!");
+}
+
+## 🧩 XR Origin プレハブとコントローラー構成について
+
+### 📁 プレハブの格納場所
+
+本プロジェクトでは、XR関連のオブジェクトはすべて `Assets/Resources/` フォルダ内にプレハブ化されています。
+
+以下の2つのプレハブが存在します：
+
+- `XR Origin 21111`
+- `XR Origin 21111(2)`
+
+本READMEで解説しているアクション割り当ては、主に  
+**`XR Origin 21111/Camera Offset/RightHand Controller`** に対して行っています。
+
+---
+
+### 🏗️ XR Originの構成（Unityの標準構造）
+
+通常、Unityで `XR Origin` をHierarchyに追加すると、以下のような構成が自動的に作成されます：
+
+```plaintext
+XR Origin
+├── Camera Offset
+│   ├── Main Camera（HMD視点に追従）
+│   ├── LeftHand Controller（左手コントローラー）
+│   └── RightHand Controller（右手コントローラー）
+
 ---
 
 この構成により、コントローラーの操作とアクションが明確に分離され、デバイス変更にも柔軟に対応できます。
