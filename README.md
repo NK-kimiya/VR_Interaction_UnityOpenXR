@@ -187,6 +187,7 @@ Unityの `XR Controller (Action-based)` は、正しくアクションを紐づ�
 private void OnEnable() {
     selectAction.action.performed += ctx => Debug.Log("Selected!");
 }
+```
 
 ## 🧩 XR Origin プレハブとコントローラー構成について
 
@@ -208,7 +209,7 @@ private void OnEnable() {
 
 通常、Unityで `XR Origin` をHierarchyに追加すると、以下のような構成が自動的に作成されます：
 
-```plaintext
+plaintext
 XR Origin
 ├── Camera Offset
 │   ├── Main Camera（HMD視点に追従）
@@ -218,4 +219,67 @@ XR Origin
 ---
 
 この構成により、コントローラーの操作とアクションが明確に分離され、デバイス変更にも柔軟に対応できます。
+
+
+
+---
+
+## 🧭 VR入力処理の全体的な流れ（OpenXR + Input System）
+
+本プロジェクトでは Unity の Input System と XR Interaction Toolkit を用いて、VRコントローラー操作を実装しています。以下は入力周りの全体フローです。
+
+---
+
+### 1. 🎯 アクションマップと入力定義の作成
+
+- `InputActionForVR.inputactions` を作成
+- アクションマップごとに操作を分類（例：RightHand, Interactions, Head）
+- 各アクションに対して：
+  - アクションタイプ（Button / Vector2 / Pose など）を指定
+  - 対応する入力デバイス（例：trigger, grip, primary2DAxis）を割り当て
+
+---
+
+### 2. 🏗 XR Originの追加とプレハブ構成
+
+- `Assets/Resources/XR Origin 21111` プレハブを使用
+- XR Origin の構成：
+  - Main Camera：HMDの視点
+  - RightHand Controller：右手の入力処理担当
+  - LeftHand Controller：今回未使用
+
+---
+
+### 3. 🔗 コントローラーにアクションを割り当てる
+
+- `RightHand Controller` にある `XR Controller (Action-based)` の各アクションスロットに、
+  `.inputactions` で定義したアクションを割り当てる
+
+| XR Controller変数       | 割り当てるアクション名 |
+|------------------------|------------------------|
+| Position Action         | `RightHand/Position`   |
+| Rotation Action         | `RightHand/Rotation`   |
+| Select Action           | `RightHandInteractions/Select` |
+| Activate Action         | `RightHandInteractions/Activate` |
+| UI Press Action         | `RightHandInteractions/UIPress` |
+| Rotate Anchor Action    | `RightHandInteractions/RotateAnchor` |
+| Translate Anchor Action | `RightHandInteractions/TranslateAnchor` |
+
+---
+
+### 4. 🧤 掴む・選択・UI操作はスクリプト不要で動作
+
+- `XR Grab Interactable` を対象オブジェクトに付ければ、Ray/Direct Interactorが掴む・選択を自動処理
+
+---
+
+### 5. 🚶‍♂️ 移動などの処理はスクリプトで制御
+
+- `XR Origin` に `CharacterController` を追加
+- スクリプトでアクション（例：Move）を読み取り、プレイヤーを移動
+
+```csharp
+Vector2 input = moveAction.action.ReadValue<Vector2>();
+Vector3 direction = camera.forward * input.y + camera.right * input.x;
+characterController.Move(direction * speed * Time.deltaTime);
 
