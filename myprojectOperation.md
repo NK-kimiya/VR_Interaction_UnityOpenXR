@@ -72,3 +72,15 @@ XR Origin
 
 　→LeftHand Controller（現在は未使用）
 '''
+
+### XR Controllerコンポーネントの変数の割り当て　
+
+| XR Controller変数       | 割り当てるアクション名 |
+|------------------------|------------------------|
+| Position Action         | `RightHand/Position`   |
+| Rotation Action         | `RightHand/Rotation`   |
+| Select Action           | `RightHandInteractions/Select` |
+| Activate Action         | `RightHandInteractions/Activate` |
+| UI Press Action         | `RightHandInteractions/UIPress` |
+| Rotate Anchor Action    | `RightHandInteractions/RotateAnchor` |
+| Translate Anchor Action | `RightHandInteractions/TranslateAnchor` |
