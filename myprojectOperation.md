@@ -124,25 +124,30 @@ VRビルドを行うには、Meta Quest 2 を「開発者モード」に設定�
 
 ---
 
-### 3.スクリプトPhotonManager.csの変更　
+### ✅ 3. スクリプト `PhotonManager.cs` の変更について
 
-下記のスクリプトのコードのURL"django-login-yggs.onrender.com"をDjangoプルジェクトをホスティングしているURLに変更して下さい。
-※現在、https://django-login-yggs.onrender.com/では、ホスティングを行っていません。
+以下のスクリプトでは、Unityから外部APIへアクセスし、アバター番号を取得しています。  
+使用しているURLは仮のものであり、**実際にDjangoプロジェクトをホスティングしているURLに変更してください。**
+変更する箇所　→　"https://django-login-yggs.onrender.com"
 
-'''
- string apiUrl = "https://django-login-yggs.onrender.com/api/get-avatar-number/ ";
-'''
+---
+
+#### 🔁 対象コード（`PhotonManager.cs`）
+
+```csharp
+string apiUrl = "https://django-login-yggs.onrender.com/api/get-avatar-number/";
+```
 
 
 
-### ✅ 3. Meta Quest 2 をUSBでPCに接続
+### ✅ 4. Meta Quest 2 をUSBでPCに接続
 
 - デバイス上で USB デバッグの許可を求められたら「許可」を選択
 - UnityがMeta Quest 2を認識した状態にする
 
 ---
 
-### ✅ 4. ビルドとデプロイ
+### ✅ 5. ビルドとデプロイ
 
 1. Unity 上部メニューから  
    `File > Build Settings` を選択  
@@ -152,7 +157,7 @@ VRビルドを行うには、Meta Quest 2 を「開発者モード」に設定�
 
 ---
 
-### ✅ 5. ヘッドセットを装着して動作確認
+### ✅ 6. ヘッドセットを装着して動作確認
 
 - トリガーやスティック操作が、アクションに応じて反映されるかをチェック
 - 掴む・色を変える・移動するなどの処理が正常に機能するかを確認
