@@ -124,7 +124,7 @@ VRビルドを行うには、Meta Quest 2 を「開発者モード」に設定�
 1. Unity 上部メニューから  
    `File > Build Settings` を選択  
 2. Platform を `Android` に設定し `Switch Platform`
-3. `Scenes In Build` に `Title Scene` が含まれていることを確認
+3. `Scenes In Build` に `Title Scene`と`GameScene Scene` が含まれていることを確認
 4. Meta Quest 2 が USB 接続されていることを確認したら `Build and Run` をクリック
 
 ---
