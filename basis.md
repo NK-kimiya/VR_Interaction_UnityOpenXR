@@ -1,7 +1,6 @@
-## 🎮 OpenXR + Input System の基本的な手順（初心者向け解説付き）
+## 🎮 OpenXR + Input System の基本的な手順
 
 UnityのOpenXR環境でVRアプリを構築する際は、Input Systemを使ってアクションベースの入力制御を行います。  
-以下に、その基本的な手順と設定ポイントを丁寧に説明します。
 
 ---
 
