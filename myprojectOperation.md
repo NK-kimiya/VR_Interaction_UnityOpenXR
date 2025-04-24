@@ -124,6 +124,17 @@ VRビルドを行うには、Meta Quest 2 を「開発者モード」に設定�
 
 ---
 
+### 3.スクリプトPhotonManager.csの変更　
+
+下記のスクリプトのコードのURL"django-login-yggs.onrender.com"をDjangoプルジェクトをホスティングしているURLに変更して下さい。
+※現在、https://django-login-yggs.onrender.com/では、ホスティングを行っていません。
+
+'''
+ string apiUrl = "https://django-login-yggs.onrender.com/api/get-avatar-number/ ";
+'''
+
+
+
 ### ✅ 3. Meta Quest 2 をUSBでPCに接続
 
 - デバイス上で USB デバッグの許可を求められたら「許可」を選択
