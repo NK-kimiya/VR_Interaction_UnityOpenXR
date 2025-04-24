@@ -105,14 +105,35 @@ XR Origin
 このプロジェクトは Meta Quest 2 を使用して、OpenXRベースのVR入力動作を検証できます。  
 以下の手順でセットアップを行ってください。
 
+## ⚠️ 前提条件：Django プロジェクトのデプロイについて
+
+本Unityプロジェクトは、外部サーバーと通信してアバター情報などを取得するため、  
+**別途 Django によるバックエンドAPIのデプロイが必要**です。
+
 ---
 
-### ✅ 1. Meta Quest 2 を開発者モードにする
+### ✅ 1-1. Meta Quest 2 を開発者モードにする
 
 VRビルドを行うには、Meta Quest 2 を「開発者モード」に設定する必要があります。
 
 #### 🔗 開発者モードの有効化方法（公式ガイド）：
 👉 [Meta公式ガイド：開発者モードの有効化](https://developer.oculus.com/documentation/unity/unity-enable-device/)
+
+---
+
+### ✅ 1-2. Photon Unity Networking (PUN) の導入
+
+本プロジェクトでは、マルチプレイヤー通信に **Photon Unity Networking (PUN)** を使用しています。  
+Unity内でPhotonを使用するには、以下の手順でセットアップを行ってください。
+
+#### 📦 導入手順
+
+1. Unity Asset Store または [Photon公式ダウンロードページ](https://www.photonengine.com/en-US/PhotonUnityNetworking) から **Photon Unity Networking (PUN 2)** をインポートします。
+2. `PhotonServerSettings` に自分の **App ID** を設定（Photon公式サイトで無料アカウント登録して取得可能）
+3. プロジェクト内の `PhotonManager.cs` などのスクリプトがネットワーク処理に対応します
+
+#### 🔗 Photon公式ページ：
+👉 [Photon Unity Networking (PUN) 公式サイト](https://www.photonengine.com/en-US/PhotonUnityNetworking)
 
 ---
 
@@ -128,7 +149,10 @@ VRビルドを行うには、Meta Quest 2 を「開発者モード」に設定�
 
 以下のスクリプトでは、Unityから外部APIへアクセスし、アバター番号を取得しています。  
 使用しているURLは仮のものであり、**実際にDjangoプロジェクトをホスティングしているURLに変更してください。**
-変更する箇所　→　"https://django-login-yggs.onrender.com"
+変更する箇所　→　
+```cshar
+"https://django-login-yggs.onrender.com"
+```
 
 ---
 
