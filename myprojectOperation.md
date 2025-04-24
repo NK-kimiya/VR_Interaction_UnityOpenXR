@@ -1,3 +1,25 @@
+## 開発したもの 
+
+目的：仮想空間(メタバース)上で音声通話をしながらコミュニケーションができるアプリで、「病気や障がいなどがきっかけで感じる孤独感を軽減したい」という目的でミニマムで開発を進めました。
+
+[紹介記事](https://kimikou-blog.jp/prototypes/vr%e3%82%a2%e3%83%97%e3%83%aa/)
+
+## 利用ツール：Unity、Django、Express、React
+
+ [VR_Interaction_UnityOpenXR(Unity)](https://github.com/NK-kimiya/VR_Interaction_UnityOpenXR)　
+
+ [VR_Interaction_API(Django)](https://github.com/NK-kimiya/VR_Interaction_API)　
+
+ [VR_Interaction_signallingserver(Express)](https://github.com/NK-kimiya/VR_Interaction_signallingserver)　
+
+ [VR_Interaction_WebRTC(React)](https://github.com/NK-kimiya/VR_Interaction_WebRTC)　
+
+ ※下記の方法での実行を試しました。　
+ 
+ Django、Express、Reactはホスティングサービス(RenderやHerokuなど)でホスティングを行い、Unityはビルドし、MetaQuest2に実行ファイルを送信　
+
+---
+
 ## 入力設定ファイルの場所
 
 使用ファイル：Assets/ActionAssets/InputActionForVR.inputactions　
